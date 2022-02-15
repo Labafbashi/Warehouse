@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Warehouse</title>
+<script type="text/javascript"> 
+	function display_c(){
+		var refresh=1000; // Refresh rate in milli seconds
+		mytime=setTimeout('display_ct()',refresh)
+	}
+
+	function display_ct() {
+		var x = new Date()
+		document.getElementById('ct').innerHTML = x;
+		display_c();
+	}
+</script>
+</head>
+<body onload="display_ct();">
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/Main.css') }}" type="text/css">
+	<div id="container">
+		<main>
+			<section class="half">
+				<div class="navbar">
+					<a href="Main.html">Home</a>
+					<div class="subnav">
+						<button class="subnavbtn">Product <i class="fa fa-caret-down"></i></button>
+						<div class="subnav-content">
+						  <a href="ShowProduct.html">Show Product</a>
+						  <a href="AddProduct.html">Add Product</a>
+						  <a href="DelProduct.html">Delete Product</a>
+						  <a href="EditProduct.html">Edit Product</a>
+						</div>
+					</div>
+					<div class="subnav">
+						<button class="subnavbtn">Customer <i class="fa fa-caret-down"></i></button>
+						<div class="subnav-content">
+							<a href="ShowCustomer.html">Show Customer</a>
+							<a href="AddCustomer.html">Add Customer</a>
+							<a href="DelCustomer.html">Delete Customer</a>
+							<a href="EditCustomer.html">Edit Customer</a>
+						</div>
+					</div>
+				    <div class="subnav">
+						<button class="subnavbtn">Staff <i class="fa fa-caret-down"></i></button>
+						<div class="subnav-content">
+					  		<a href="ShowStaff.html">Show Staff</a>
+					  		<a href="AddStaff.html">Add Staff</a>
+					  		<a href="DelStaff.html">Delete Staff</a>
+					  		<a href="EditStaff.html">Edit Staff</a>
+						</div>
+				    </div>
+				    <div class="subnav">
+						<button class="subnavbtn">Order <i class="fa fa-caret-down"></i></button>
+						<div class="subnav-content">
+					 		<a href="ShowOrder.html">Show Order</a>
+					  		<a href="AddOrder.html">Add Order</a>
+					  		<a href="DelOrder.html">Delete Order</a>
+					  		<a href="EditOrder.html">Edit Order</a>
+						</div>
+				    </div>
+				</div>
+			</section>
+			<section class="half">
+				<form id="form1" name="ShowStaff">
+				  <div><b><i>Current Date and Time is <span id="ct" ></span></i></b></div>
+				  <div><p></p></div>
+				  <table border="1" cellpadding="5" cellspacing="5">
+					{% for row in data %}
+					<tr>
+						{% for d in row %}
+						<td>{{d}}</td>
+						{% endfor %}
+					</tr>
+					{% endfor %}
+					</table>
+				</form>
+			</section>
+		</main>
+	</div>
+</body>
+</html>
