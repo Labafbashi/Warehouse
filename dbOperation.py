@@ -53,6 +53,13 @@ def showStaff():
     return rows
 
 def showOrder():
-    cursor.execute("SELECT p.name as product_name,c.last_name as customer_name,s.last_name as staff_name,o.* FROM Orders as o inner join Products as p, Customers as c, Staffs as s where o.product_id=p.id and o.customer_id=c.id and o.staff_id=s.id;")
+    cursor.execute("SELECT o.id, \
+			p.name as product_name, \
+			Concat(c.first_name,' ',c.last_name) as customer_name, \
+			Concat(s.first_name,' ',s.last_name) as staff_name, \
+			o.count, p.price, \
+			round(o.count*p.price,2) as total_price \
+			FROM Orders as o inner join Products as p, Customers as c, Staffs as s \
+			where o.product_id=p.id and o.customer_id=c.id and o.staff_id=s.id;")
     rows = cursor.fetchall()
     return rows

@@ -68,5 +68,20 @@ def showProducts():
 	product_list=dbo.showProduct()
 	return render_template('ShowProduct.html', product_list=product_list)
 
+@app.route("/ShowCustomer.html")
+def showCustomer():
+	customer_list=dbo.showCustomer()
+	return render_template("ShowCustomer.html", customer_list=customer_list)
+
+@app.route("/ShowStaff.html")
+def showStaff():
+	staff_list=dbo.showStaff()
+	return render_template("ShowStaff.html", staff_list=staff_list)
+
+@app.route("/ShowOrder.html")
+def showOrder():
+	order_list=dbo.showOrder()
+	return render_template("ShowOrder.html", order_list=order_list)
+
 if __name__=='__main__':
 	app.run(debug=True)
