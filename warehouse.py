@@ -43,10 +43,16 @@ def addStuffs():
 		return redirect(url_for('addStuffs'))
 	else:
 		return render_template('AddStaff.html')
-	
+
+@app.route("/AddOrder.html")
+def fillCombo():
+	product_list=dbo.showProduct()
+	customer_list=dbo.showCustomer()
+	staff_list=dbo.showStaff()
+	return render_template('AddOrder.html', product_list=product_list,customer_list=customer_list,staff_list=staff_list)
+
 @app.route("/AddOrder.html", methods=["POST", "GET"])
 def addOrders():
-	product_list=dbo.showProduct()
 	if request.method == "POST":
 		opid = int(request.form["ProductSelect"])
 		ocid = int(request.form["CustomerSelect"])
@@ -55,8 +61,12 @@ def addOrders():
 		add_new = dbo.addOrders(opid, ocid, osid, ocount)
 		return redirect(url_for('addOrders'))
 	else:
-		return render_template('AddOrder.html', option_list=product_list)
+		return render_template('AddOrder.html')
 
+@app.route("/ShowProduct.html")
+def showProducts():
+	product_list=dbo.showProduct()
+	return render_template('ShowProduct.html', product_list=product_list)
 
 if __name__=='__main__':
 	app.run(debug=True)

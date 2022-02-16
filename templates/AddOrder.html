@@ -69,22 +69,24 @@
 					  <b>Product: </b>
 					  <select name="ProductSelect" id="ProductSelect" width="300px">
 							{% for o in product_list %}
-						  	<option value="{{ o[0].id }}">{{ o[1].name }}</option>
+						  	<option value={{ o[0] }}>{{ o[0]|string+" , "+o[1] }}</option>
 							{% endfor %}
 					  </select>
 				  </div>
 				  <div>
 					  <b>Customer: </b>
 					  <select name="CustomerSelect" id="CustomerSelect" width="300px">
-						<option value="1" selected="yes">1</option>
-						<option value="2">2</option>
+							{% for o in customer_list  %}
+								<option value={{ o[0] }}>{{ o[0]|string+" , "+o[1]+" "+o[2] }}</option>
+							{% endfor %}
 					  </select>
 				  </div>
 				  <div>
 					  <b>Staff: </b>
 					  <select name="StaffSelect" id="StaffSelect" width="300px">
-						  <option value="1" selected="yes">1</option>
-						  <option value="2">2</option>
+               {% for o in staff_list %}
+                 <option value={{ o[0] }}>{{ o[0]|string+" , "+o[1]+" "+o[2] }}</option>
+               {% endfor %}
 					  </select>
 				  </div>
 				  <div><b>Count: </b><input type="text" value="" name="pamount" id="pamount" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
