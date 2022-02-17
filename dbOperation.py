@@ -63,3 +63,15 @@ def showOrder():
 			where o.product_id=p.id and o.customer_id=c.id and o.staff_id=s.id;")
     rows = cursor.fetchall()
     return rows
+
+def showExacProduct(pid):
+	sql="select * from Products where id=%s ;" % pid
+	cursor.execute(sql)
+	row = cursor.fetchall()
+	return row
+
+def delExacProduct(pid):
+	sql="delete from Products where id=%s ;" % pid
+	cursor.execute(sql)
+	connection.commit()
+	return 1

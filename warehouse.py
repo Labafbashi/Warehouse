@@ -83,5 +83,19 @@ def showOrder():
 	order_list=dbo.showOrder()
 	return render_template("ShowOrder.html", order_list=order_list)
 
+@app.route("/DelProduct.html")
+def delProductMain():
+	product_list=dbo.showProduct()
+	return render_template('DelProduct.html', product_list=product_list)
+
+@app.route("/DelProduct.html/<int:pid>")
+def delProductID(pid):
+	if (request.args.get("submit") == "Submit"):
+		dbo.delExacProduct(int(pid))
+		return redirect(url_for('delProductMain'))
+	else:
+		exac_product=dbo.showExacProduct(int(pid))
+		return render_template('DelProduct.html', exac_product=exac_product)
+
 if __name__=='__main__':
 	app.run(debug=True)
