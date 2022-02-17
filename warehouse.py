@@ -97,5 +97,47 @@ def delProductID(pid):
 		exac_product=dbo.showExacProduct(int(pid))
 		return render_template('DelProduct.html', exac_product=exac_product)
 
+@app.route("/DelCustomer.html")
+def delCustomerMain():
+  customer_list=dbo.showCustomer()
+  return render_template('DelCustomer.html', customer_list=customer_list)
+
+@app.route("/DelCustomer.html/<int:cid>")
+def delCustomerID(cid):
+  if (request.args.get("submit") == "Submit"):
+    dbo.delExacCustomer(int(cid))
+    return redirect(url_for('delCustomerMain'))
+  else:
+    exac_customer=dbo.showExacCustomer(int(cid))
+    return render_template('DelCustomer.html', exac_customer=exac_customer)
+
+@app.route("/DelStaff.html")
+def DelStaffMain():
+  staff_list=dbo.showStaff()
+  return render_template('DelStaff.html', staff_list=staff_list)
+
+@app.route("/DelStaff.html/<int:sid>")
+def DelStaffID(sid):
+  if (request.args.get("submit") == "Submit"):
+    dbo.delExacStaff(int(sid))
+    return redirect(url_for('DelStaffMain'))
+  else:
+    exac_staff=dbo.showExacStaff(int(sid))
+    return render_template('DelStaff.html', exac_staff=exac_staff)
+
+@app.route("/DelOrder.html")
+def DelOrderMain():
+  order_list=dbo.showOrder()
+  return render_template('DelOrder.html', order_list=order_list)
+
+@app.route("/DelOrder.html/<int:oid>")
+def DelOrderID(oid):
+  if (request.args.get("submit") == "Submit"):
+    dbo.delExacOredr(int(oid))
+    return redirect(url_for('DelOrderMain'))
+  else:
+    exac_order=dbo.showExacOrder(int(oid))
+    return render_template('DelOrder.html', exac_order=exac_order)
+
 if __name__=='__main__':
 	app.run(debug=True)

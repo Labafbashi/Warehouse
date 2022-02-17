@@ -75,3 +75,47 @@ def delExacProduct(pid):
 	cursor.execute(sql)
 	connection.commit()
 	return 1
+
+def showExacCustomer(cid):
+  sql="select * from Customers where id=%s ;" % cid
+  cursor.execute(sql)
+  row = cursor.fetchall()
+  return row
+
+def delExacCustomer(cid):
+  sql="delete from Customers where id=%s ;" % cid
+  cursor.execute(sql)
+  connection.commit()
+  return 1
+
+def showExacStaff(sid):
+  sql="select * from Staffs where id=%s ;" % sid
+  cursor.execute(sql)
+  row = cursor.fetchall()
+  return row
+
+def delExacStaff(sid):
+  sql="delete from Staffs where id=%s ;" % sid
+  cursor.execute(sql)
+  connection.commit()
+  return 1
+
+def showExacOrder(oid):
+  sql="SELECT o.id, \
+		p.name as product_name, \
+    Concat(c.first_name,' ',c.last_name) as customer_name, \
+    Concat(s.first_name,' ',s.last_name) as staff_name, \
+    o.count, p.price, \
+    round(o.count*p.price,2) as total_price \
+		FROM Orders as o inner join Products as p, Customers as c, Staffs as s  \
+    where o.product_id=p.id and o.customer_id=c.id and o.staff_id=s.id \
+    and o.id = %s ;" % oid 
+  cursor.execute(sql)
+  row = cursor.fetchall()
+  return row
+
+def delExacOredr(oid):
+  sql="delete from Orders where id=%s ;" % oid
+  cursor.execute(sql)
+  connection.commit()
+  return 1
