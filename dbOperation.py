@@ -119,3 +119,8 @@ def delExacOredr(oid):
   cursor.execute(sql)
   connection.commit()
   return 1
+
+def editProduct(pID,pName,pPrice,pAmount):
+	cursor.execute("update Products set name= %s, price= %s, amount= %s, updated_at=%s where id=%s", (pName,pPrice,pAmount,pID))
+	connection.commit()
+	return 1

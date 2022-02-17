@@ -17,7 +17,7 @@ def addProduct():
 		add_new = dbo.addProduct(pName,pPrice,pAmount)
 		return redirect(url_for('addProduct'))
 	else:
-		return render_template('AddProduct.html', text="No Value.")
+		return render_template('AddProduct.html')
 
 @app.route("/AddCustomer.html", methods=["POST", "GET"])
 def addCustomer():
@@ -138,6 +138,25 @@ def DelOrderID(oid):
   else:
     exac_order=dbo.showExacOrder(int(oid))
     return render_template('DelOrder.html', exac_order=exac_order)
+
+@app.route("/EditProduct.html")
+def editProductMain():
+	product_list=dbo.showProduct()
+	return render_template('EditProduct.html', product_list=product_list)
+
+@app.route("/EditProduct.html/<int:pid>", methods=["POST", "GET"])
+def editProductID(pid):
+	if request.method == "POST":
+		pID = request.form["pid"]
+		pName = request.form["pname"]
+		pPrice = float(request.form["pprice"])
+		pAmount = int(request.form["pamount"])
+		edit_row = dbo.editProduct(pID,pName,pPrice,pAmount)
+		return redirect(url_for('editProductID'))
+	else:
+		exac_product=dbo.showExacProduct(int(pid))
+		product_list=exac_product
+		return render_template('EditProduct.html', exac_product=exac_product, product_list=product_list)
 
 if __name__=='__main__':
 	app.run(debug=True)

@@ -68,6 +68,7 @@
            <div id="table-wrapper">
              <div id="table-scroll">
                <table>
+									<caption><b> Delete Order </b></caption>
                  <thead>
                    <tr>
 										<th><span>Order ID</span></th>
@@ -113,7 +114,7 @@
              </div>
            </div>
          {% if exac_order != null  %}
-           <div><b> Are you sure to delete this order? </b></div>
+            <div id="attention"><b> Are you sure to delete this customer? </b></div>
            <input type="submit" value="Submit" name="submit">
            <input type="button" value="Cancel" name="cancel" onClick="location.href='/DelOrder.html'">
          {% endif %}
