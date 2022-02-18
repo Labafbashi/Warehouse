@@ -110,6 +110,10 @@ main {
   width:35%;
   border:3px solid black;
 }
+#table-wrapper table  tr:hover * {
+	background-color: #4F71E7;
+	text-decoration:none
+}
 caption {
     padding: 10px;
   	border: 3px solid rgb(200, 200, 200);

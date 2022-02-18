@@ -106,7 +106,7 @@ def showExacOrder(oid):
     Concat(c.first_name,' ',c.last_name) as customer_name, \
     Concat(s.first_name,' ',s.last_name) as staff_name, \
     o.count, p.price, \
-    round(o.count*p.price,2) as total_price \
+    round(o.count*p.price,2) as total_price, p.id, c.id, s.id \
 		FROM Orders as o inner join Products as p, Customers as c, Staffs as s  \
     where o.product_id=p.id and o.customer_id=c.id and o.staff_id=s.id \
     and o.id = %s ;" % oid 
@@ -121,6 +121,21 @@ def delExacOredr(oid):
   return 1
 
 def editProduct(pID,pName,pPrice,pAmount):
-	cursor.execute("update Products set name= %s, price= %s, amount= %s, updated_at=%s where id=%s", (pName,pPrice,pAmount,pID))
+	cursor.execute("update Products set name= %s, price= %s, amount= %s, updated_at=%s where id=%s", (pName,pPrice,pAmount,datenow,pID))
 	connection.commit()
 	return 1
+
+def editCustomer(cID,fName,lName,cStreet,cPostCode,cAge):
+  cursor.execute("update Customers set first_name= %s, last_name= %s, street= %s, post_code= %s, age= %s, updated_at=%s where id=%s", (fName,lName,cStreet,cPostCode,cAge,datenow,cID))
+  connection.commit()
+  return 1
+
+def editStaff(sid,fName,lName,sEmployeeSince,sAge):
+  cursor.execute("update Staffs set first_name= %s, last_name= %s, employee_since= %s, age= %s, updated_at=%s where id=%s", (fName,lName,sEmployeeSince,sAge,datenow,sid))
+  connection.commit()
+  return 1
+
+def editOrder(oid,productid,customerid,staffid,ocount):
+  cursor.execute("update Orders set product_id= %s, customer_id= %s, staff_id= %s, count= %s, updated_at=%s where id=%s", (productid,customerid,staffid,ocount,datenow,oid))
+  connection.commit()
+  return 1

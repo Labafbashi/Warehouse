@@ -144,19 +144,83 @@ def editProductMain():
 	product_list=dbo.showProduct()
 	return render_template('EditProduct.html', product_list=product_list)
 
-@app.route("/EditProduct.html/<int:pid>", methods=["POST", "GET"])
-def editProductID(pid):
+@app.route("/EditProduct.html/<int:pid1>", methods=["POST", "GET"])
+def editProductID(pid1):
 	if request.method == "POST":
 		pID = request.form["pid"]
 		pName = request.form["pname"]
 		pPrice = float(request.form["pprice"])
 		pAmount = int(request.form["pamount"])
 		edit_row = dbo.editProduct(pID,pName,pPrice,pAmount)
-		return redirect(url_for('editProductID'))
+		return redirect(url_for('editProductMain'))
 	else:
-		exac_product=dbo.showExacProduct(int(pid))
+		exac_product=dbo.showExacProduct(int(pid1))
 		product_list=exac_product
 		return render_template('EditProduct.html', exac_product=exac_product, product_list=product_list)
+
+@app.route("/EditCustomer.html")
+def editCustomerMain():
+  Customer_list=dbo.showCustomer()
+  return render_template('EditCustomer.html', Customer_list=Customer_list)
+
+@app.route("/EditCustomer.html/<int:cid1>", methods=["POST", "GET"])
+def editCustomerID(cid1):
+	if request.method == "POST":
+		cID = int(request.form["cid"])
+		fName = request.form["fname"]
+		lName = request.form["lname"]
+		cStreet = request.form["cstreet"]
+		cPostCode = int(request.form["cpostcode"])
+		cAge = int(request.form["cage"])
+		edit_row = dbo.editCustomer(cID,fName,lName,cStreet,cPostCode,cAge)
+		return redirect(url_for('editCustomerMain'))
+	else:
+		exac_Customer=dbo.showExacCustomer(int(cid1))
+		Customer_list=exac_Customer
+		return render_template('EditCustomer.html', exac_Customer=exac_Customer, Customer_list=Customer_list)
+
+@app.route("/EditStaff.html")
+def editStaffMain():
+  Staff_list=dbo.showStaff()
+  return render_template('EditStaff.html', Staff_list=Staff_list)
+
+@app.route("/EditStaff.html/<int:sid1>", methods=["POST", "GET"])
+def editStaffID(sid1):
+	if request.method == "POST":
+		sid = request.form["sid"]
+		fName = request.form["fname"]
+		lName = request.form["lname"]
+		sEmployeeSince = request.form["semployeesince"]
+		sAge = int(request.form["sage"])
+		edit_row = dbo.editStaff(sid,fName,lName,sEmployeeSince,sAge)
+		return redirect(url_for('editStaffMain'))
+	else:
+		exac_Staff=dbo.showExacStaff(int(sid1))
+		Staff_list=exac_Staff
+		return render_template('EditStaff.html', exac_Staff=exac_Staff, Staff_list=Staff_list)
+
+@app.route("/EditOrder.html")
+def editOrderMain():
+  Order_list=dbo.showOrder()
+  return render_template('EditOrder.html', Order_list=Order_list)
+
+@app.route("/EditOrder.html/<int:oid1>", methods=["POST", "GET"])
+def editOrderID(oid1):
+	if request.method == "POST":
+		oid = int(request.form["oid"])
+		productid = int(request.form["ProductSelect"])
+		customerid = int(request.form["CustomerSelect"])
+		staffid = int(request.form["StaffSelect"])
+		ocount = int(request.form["ocount"])
+		edit_row = dbo.editOrder(oid,productid,customerid,staffid,ocount)
+		return redirect(url_for('editOrderMain'))
+	else:
+		product_list=dbo.showProduct()
+		customer_list=dbo.showCustomer()
+		staff_list=dbo.showStaff()
+		exac_Order=dbo.showExacOrder(int(oid1))
+		Order_list=exac_Order
+		return render_template('EditOrder.html', exac_Order=exac_Order, Order_list=Order_list, product_list=product_list, customer_list=customer_list, staff_list=staff_list)
 
 if __name__=='__main__':
 	app.run(debug=True)
