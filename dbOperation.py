@@ -16,21 +16,40 @@ except:
 
 cursor = connection.cursor()
 datenow = datetime.now()
-#inserting data to db
+
+
 def addProduct(pname,pprice,pamount):
-	cursor.execute("INSERT INTO Products(name, price,amount,created_at,updated_at) VALUES (%s, %s, %s, %s, %s)", (pname,pprice,pamount,datenow,datenow))
-	connection.commit()
-	return 1
+	sql="select * from Products where name='" + pname + "';"
+	cursor.execute(sql)
+	row = cursor.fetchone()
+	if cursor.rowcount == 0:
+		cursor.execute("INSERT INTO Products(name, price,amount,created_at,updated_at) VALUES (%s, %s, %s, %s, %s)", (pname,pprice,pamount,datenow,datenow))
+		connection.commit()
+		return 1
+	else:
+		return -1
 
 def addCustomer(cfirstname, clastname, cstreet, cpostcode, cage):
-    cursor.execute("INSERT INTO Customers(first_name, last_name, street, post_code, age,created_at,updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s)", (cfirstname, clastname, cstreet, cpostcode, cage,datenow,datenow))
-    connection.commit()
-    return 1
+	sql = "SELECT * FROM Customers where first_name='" + cfirstname + "' and last_name='" + clastname + "';"
+	cursor.execute(sql)
+	row = cursor.fetchall()
+	if cursor.rowcount == 0:
+		cursor.execute("INSERT INTO Customers(first_name, last_name, street, post_code, age,created_at,updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s)", (cfirstname, clastname, cstreet, cpostcode, cage,datenow,datenow))
+		connection.commit()
+		return 1
+	else:
+		return -1
 
 def addStuffs(sfirstname, slastname, ssempsince, sage):
-    cursor.execute("INSERT INTO Staffs(first_name, last_name, employee_since, age,created_at,updated_at) VALUES (%s, %s, %s, %s, %s, %s)", (sfirstname, slastname, ssempsince, sage,datenow,datenow))
-    connection.commit()
-    return 1
+	sql = "SELECT * FROM Staffs where first_name='" + sfirstname + "' and last_name='" + slastname + "';"
+	cursor.execute(sql)
+	row = cursor.fetchall()
+	if cursor.rowcount == 0:
+		cursor.execute("INSERT INTO Staffs(first_name, last_name, employee_since, age,created_at,updated_at) VALUES (%s, %s, %s, %s, %s, %s)", (sfirstname, slastname, ssempsince, sage,datenow,datenow))
+		connection.commit()
+		return 1
+	else:
+		return -1
 
 def addOrders(opid,ocid,osid,ocount):
     cursor.execute("INSERT INTO Orders(product_id, customer_id, staff_id, count, created_at, updated_at) VALUES (%s, %s, %s, %s, %s, %s)", (opid,ocid,osid,ocount,datenow,datenow))
@@ -121,19 +140,37 @@ def delExacOredr(oid):
   return 1
 
 def editProduct(pID,pName,pPrice,pAmount):
-	cursor.execute("update Products set name= %s, price= %s, amount= %s, updated_at=%s where id=%s", (pName,pPrice,pAmount,datenow,pID))
-	connection.commit()
-	return 1
+	sql="select * from Products where name='" + pName + "';"
+	cursor.execute(sql)
+	row = cursor.fetchone()
+	if cursor.rowcount == 0:
+		cursor.execute("update Products set name= %s, price= %s, amount= %s, updated_at=%s where id=%s", (pName,pPrice,pAmount,datenow,pID))
+		connection.commit()
+		return 1
+	else:
+		return -1
 
 def editCustomer(cID,fName,lName,cStreet,cPostCode,cAge):
-  cursor.execute("update Customers set first_name= %s, last_name= %s, street= %s, post_code= %s, age= %s, updated_at=%s where id=%s", (fName,lName,cStreet,cPostCode,cAge,datenow,cID))
-  connection.commit()
-  return 1
+	sql = "SELECT * FROM Customers where first_name='" + fName + "' and last_name='" + lName + "';"
+	cursor.execute(sql)
+	row = cursor.fetchall()
+	if cursor.rowcount == 0:
+		cursor.execute("update Customers set first_name= %s, last_name= %s, street= %s, post_code= %s, age= %s, updated_at=%s where id=%s", (fName,lName,cStreet,cPostCode,cAge,datenow,cID))
+		connection.commit()
+		return 1
+	else:
+		return -1
 
 def editStaff(sid,fName,lName,sEmployeeSince,sAge):
-  cursor.execute("update Staffs set first_name= %s, last_name= %s, employee_since= %s, age= %s, updated_at=%s where id=%s", (fName,lName,sEmployeeSince,sAge,datenow,sid))
-  connection.commit()
-  return 1
+	sql = "SELECT * FROM Staffs where first_name='" + fName + "' and last_name='" + lName + "';"
+	cursor.execute(sql)
+	row = cursor.fetchall()
+	if cursor.rowcount == 0:
+		cursor.execute("update Staffs set first_name= %s, last_name= %s, employee_since= %s, age= %s, updated_at=%s where id=%s", (fName,lName,sEmployeeSince,sAge,datenow,sid))
+		connection.commit()
+		return 1
+	else:
+		return -1
 
 def editOrder(oid,productid,customerid,staffid,ocount):
   cursor.execute("update Orders set product_id= %s, customer_id= %s, staff_id= %s, count= %s, updated_at=%s where id=%s", (productid,customerid,staffid,ocount,datenow,oid))
