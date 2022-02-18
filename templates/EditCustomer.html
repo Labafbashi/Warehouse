@@ -83,7 +83,7 @@
                     {% for row in Customer_list %}
                       <span class="trtbl">
                       <tr>
-                       <td><a href="EditCustomer.html/{{ row[0] }}">{{ row[0] }}</a></td>
+                       <td><a href="/EditCustomer.html/{{ row[0] }}">{{ row[0] }}</a></td>
                        <td>{{ row[1] }}</td>
                        <td>{{ row[2] }}</td>
                        <td>{{ row[3] }}</td>
@@ -101,11 +101,11 @@
          <form id="form2" name="EditCustomer" method="post">
            {% for row in exac_Customer %}
            <div><b>Customer ID: </b><input type="text" value="{{ row[0] }}" name="cid" id="cid" readonly title="This is a readonly field."></div>
-          <div><b>First Name: </b><input type="text" value="{{ row[1] }}" name="fname" id="fname"></div>
-          <div><b>Last Name: </b><input type="text" value="{{ row[2] }}" name="lname" id="lname"></div>
-          <div><b>Street: </b><input type="text" value="{{ row[3] }}" name="cstreet" id="cstreet"></div>
-          <div><b>Post Code: </b><input type="text" value="{{ row[4] }}" name="cpostcode" id="cpostcode" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && even    t.charCode <= 57))"></div>
-          <div><b>age: </b><input type="number" name="cage" id="cage" value="{{ row[5] }}"></div>
+          <div><b>First Name: </b><input type="text" value="{{ row[1] }}" name="fname" id="fname" maxlength="45"></div>
+          <div><b>Last Name: </b><input type="text" value="{{ row[2] }}" name="lname" id="lname" maxlength="45"></div>
+          <div><b>Street: </b><input type="text" value="{{ row[3] }}" name="cstreet" id="cstreet" maxlength="150"></div>
+          <div><b>Post Code: </b><input type="text" value="{{ row[4] }}" name="cpostcode" id="cpostcode" maxlength="10" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && even    t.charCode <= 57))"></div>
+          <div><b>age: </b><input type="number" name="cage" id="cage" value="{{ row[5] }}" min=10 max=120></div>
            <input type="submit" value="Submit" name="submit">
            <input type="button" value="Cancel" name="cancel" onClick="location.href='/EditCustomer.html'">
            {% endfor %}

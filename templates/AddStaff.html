@@ -68,10 +68,10 @@
 					<table width=100%>
 						<caption><b> Add Staff </b></caption>
 					</table>
-				  <div><b>First Name: </b><input type="text" value="" name="fname" id="fname"></div>
-				  <div><b>Last Name: </b><input type="text" value="" name="lname" id="lname"></div>
+				  <div><b>First Name: </b><input type="text" value="" name="fname" id="fname" maxlength="45"></div>
+				  <div><b>Last Name: </b><input type="text" value="" name="lname" id="lname" maxlength="45"></div>
 				  <div><b>Employee since: </b><input type="date" name="semployeesince" id="semployeesince"></div>
-				  <div><b>age: </b><input type="number" name="sage" id="sage"></div>
+				  <div><b>age: </b><input type="number" name="sage" id="sage" min=10 max=110></div>
 				  <input type="reset" value="Reset form" name="reset">
 				  <input type="submit" value="Submit" name="submit">
 				  <input type="button" value="Cancel" name="cancel" onClick="location.href='/Main.html'">

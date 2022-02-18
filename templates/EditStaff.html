@@ -82,7 +82,7 @@
                     {% for row in Staff_list %}
                       <span class="trtbl">
                       <tr>
-                       <td><a href="EditStaff.html/{{ row[0] }}">{{ row[0] }}</a></td>
+                       <td><a href="/EditStaff.html/{{ row[0] }}">{{ row[0] }}</a></td>
                        <td>{{ row[1] }}</td>
                        <td>{{ row[2] }}</td>
                        <td>{{ row[3] }}</td>
@@ -99,10 +99,10 @@
          <form id="form2" name="EditStaff" method="post">
            {% for row in exac_Staff %}
            <div><b>Staff ID: </b><input type="text" value="{{ row[0] }}" name="sid" id="sid" readonly title="This is a readonly field."></div>
-          <div><b>First Name: </b><input type="text" value="{{ row[1] }}" name="fname" id="fname"></div>
-          <div><b>Last Name: </b><input type="text" value="{{ row[2] }}" name="lname" id="lname"></div>
+          <div><b>First Name: </b><input type="text" value="{{ row[1] }}" name="fname" id="fname" maxlength="45"></div>
+          <div><b>Last Name: </b><input type="text" value="{{ row[2] }}" name="lname" id="lname" maxlength="45"></div>
           <div><b>Employee Since: </b><input type="date"  value="{{ row[3] }}" name="semployeesince" id="semployeesince"></div>
-          <div><b>age: </b><input type="number" name="sage" id="sage" value="{{ row[4] }}"></div>
+          <div><b>age: </b><input type="number" name="sage" id="sage" value="{{ row[4] }}" min=10 max=120></div>
            <input type="submit" value="Submit" name="submit">
            <input type="button" value="Cancel" name="cancel" onClick="location.href='/EditStaff.html'">
            {% endfor %}

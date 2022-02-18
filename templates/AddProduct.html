@@ -68,9 +68,9 @@
 					<table width=100%>
 						<caption><b> Add Products </b></caption>
 					</table>
-				  <div><b>Product Name: </b><input type="text" value="" name="pname" id="pname"></div>
+				  <div><b>Product Name: </b><input type="text" value="" name="pname" id="pname" maxlength="20"></div>
 				  <div><b>Product Price: </b><input type="text" value="" name="pprice" id="pprice" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))"></div>
-				  <div><b>Product Amount: </b><input type="text" value="" name="pamount" id ="pamount" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
+				  <div><b>Product Amount: </b><input type="text" value="" name="pamount" id ="pamount" min=0 max=65536 onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"></div>
 				  <input type="reset" value="Reset form" name="reset">
 				  <input type="submit" value="Submit" name="submit">
 				  <input type="button" value="Cancel" name="cancel" onClick="location.href='/Main.html'">
