@@ -6,8 +6,8 @@ import sys
 try:
 	connection = mysql.connector.connect(
 		host = "localhost",
-		user = "paramont",
-		password = "Monaliza!360",
+		user = "Test",
+		password = "Test@123",
 		database = "warehouse",
 		auth_plugin='mysql_native_password')
 	print("DB  Connected.")
